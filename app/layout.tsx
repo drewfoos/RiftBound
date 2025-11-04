@@ -2,7 +2,14 @@
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
-import { SiteHeader } from "@/components/site-header";
+import Header from "@/components/header";
+import { Rajdhani } from "next/font/google";
+
+const rajdhani = Rajdhani({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-rajdhani",
+});
 
 export const metadata: Metadata = {
   title: "Riftbound TCG",
@@ -11,14 +18,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
       <html lang="en">
         <body className="min-h-screen bg-background text-foreground">
-          <SiteHeader />
+          <Header fontClass={rajdhani.className} /> {/* ← pass font */}
           {children}
         </body>
       </html>
